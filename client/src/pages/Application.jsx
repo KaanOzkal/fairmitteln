@@ -58,7 +58,8 @@ const Application = () => {
       });
 
       // GERÇEK BACKEND İSTEĞİ (Node.js API)
-      const response = await axios.post('https://fairmitteln.onrender.com/api/applications', formDataToSend, {
+      // Yeni Hali:
+        const response = await axios.post('https://fairmitteln-backend.onrender.com/api/applications/submit', formDataToSend, { 
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
