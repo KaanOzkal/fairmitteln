@@ -14,7 +14,7 @@ app.use(helmet());
 
 // Frontend domaininize izin verin
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: process.env.CLIENT_URL || 'https://fairmitteln.onrender.com/',
   methods: ['GET', 'POST'],
 }));
 

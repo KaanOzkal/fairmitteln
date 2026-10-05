@@ -68,7 +68,7 @@ const Kontakt = () => {
     
     try {
       // Backend'e SMTP üzerinden mail atması için istek atıyoruz (İleride bağlayacağımız yer)
-      await axios.post('http://localhost:5000/api/contact', formData);
+      await axios.post('https://fairmitteln.onrender.com/api/contact', formData);
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
       
