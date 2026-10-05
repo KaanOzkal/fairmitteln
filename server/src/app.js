@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+
 import applicationRoutes from './routes/applicationRoutes.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 
@@ -10,42 +11,94 @@ dotenv.config();
 
 const app = express();
 
+// ==========================================
+// GÜVENLİK
+// ==========================================
+
 app.use(helmet());
 
-// Frontend domaininize izin verin
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://fairmitteln.onrender.com/',
-  methods: ['GET', 'POST'],
-}));
+// ==========================================
+// CORS
+// ==========================================
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || 'https://fairmitteln.onrender.com',
+    methods: ['GET', 'POST'],
+  })
+);
+
+// ==========================================
+// JSON
+// ==========================================
 
 app.use(express.json());
 
-// Saniyede çok fazla form gönderilmesini engelle (Spam koruması)
+// ==========================================
+// RATE LIMIT
+// ==========================================
+
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 dakika
-  max: 100, // IP başına limit
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+
   message: {
     success: false,
-    message: 'Zu viele Anfragen. Bitte versuchen Sie es später erneut.'
-  }
+    message:
+      'Zu viele Anfragen. Bitte versuchen Sie es später erneut.',
+  },
 });
+
 app.use('/api', limiter);
 
-// Ana API Rotaları
+// ==========================================
+// ANA ROUTE
+// ==========================================
+
+app.get('/', (req, res) => {
+  res.json({
+    success: true,
+    message: 'BERLINER API ist online.',
+  });
+});
+
+// ==========================================
+// API ROUTES
+// ==========================================
+
 app.use('/api/applications', applicationRoutes);
 
-// Test Route
+// ==========================================
+// HEALTH CHECK
+// ==========================================
+
 app.get('/api/health', (req, res) => {
-  res.json({ success: true, message: 'BERLINER API ist online.' });
+  res.json({
+    success: true,
+    message: 'BERLINER API ist online.',
+  });
 });
 
-// Bulunamayan Rotalar (404)
+// ==========================================
+// 404 - ROUTE BULUNAMADI
+// ==========================================
+
 app.use((req, res) => {
-  res.status(404).json({ success: false, message: 'Route nicht gefunden.' });
+  res.status(404).json({
+    success: false,
+    message: 'Route nicht gefunden.',
+  });
 });
 
-// Global Hata Yakalayıcı (En sonda olmalı)
+// ==========================================
+// GLOBAL ERROR HANDLER
+// ==========================================
+
 app.use(errorHandler);
+
+// ==========================================
+// SERVER
+// ==========================================
 
 const PORT = process.env.PORT || 5000;
 
