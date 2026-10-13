@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 const Application = () => {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({}); 
+  const [formData, setFormData] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [appNumber, setAppNumber] = useState('');
@@ -35,30 +35,30 @@ const Application = () => {
 
   const handleSubmit = async (finalData) => {
     const completeData = { ...formData, ...finalData };
-    
+
     setIsSubmitting(true);
     setErrorMessage('');
-    
+
     try {
       const formDataToSend = new FormData();
-      
+
       Object.keys(completeData).forEach(key => {
         // Dosya yükleme kontrolü
         if (key === 'document' && completeData[key]) {
           formDataToSend.append('document', completeData[key]);
-        } 
+        }
         // Çoklu tır seçimi (Array) gibi dizileri arka plana (Node.js) doğru formata çevirme
         else if (Array.isArray(completeData[key])) {
           completeData[key].forEach(val => formDataToSend.append(key, val));
-        } 
+        }
         // Normal metin/sayı alanları
         else {
           formDataToSend.append(key, completeData[key]);
         }
       });
 
-      // GERÇEK BACKEND İSTEĞİ (Burayı senin için tamamen doğru hedefe ayarladım)
-      const response = await axios.post('https://fairmitteln-backend.onrender.com/api/applications', formDataToSend, { 
+      // Link https://fairmitteln.onrender.com/api/applications olarak güncellendi!
+      const response = await axios.post('https://fairmitteln.onrender.com/api/applications', formDataToSend, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 
@@ -84,17 +84,17 @@ const Application = () => {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFE492]/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
         <div className="max-w-4xl mx-auto">
-          
+
           {isSuccess ? (
             <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-16 text-center animate-in zoom-in-95 duration-500">
               <div className="w-24 h-24 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
                 <CheckCircle2 className="w-12 h-12" />
               </div>
-              
+
               <h1 className="text-4xl font-black text-[#043873] mb-6">
                 Vielen Dank!
               </h1>
-              
+
               <p className="text-gray-600 text-lg mb-10 leading-relaxed max-w-lg mx-auto">
                 Ihre Anfrage wurde erfolgreich übermittelt. Unser Team wird sich in Kürze persönlich bei Ihnen melden.
               </p>
@@ -130,7 +130,7 @@ const Application = () => {
               </div>
 
               <div className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(4,56,115,0.05)] border border-gray-100 p-8 sm:p-12 lg:p-16 min-h-[500px] relative overflow-hidden">
-                
+
                 {/* YÜKLENİYOR EKRANI */}
                 {isSubmitting && (
                   <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center rounded-[2.5rem]">
@@ -148,7 +148,7 @@ const Application = () => {
                 )}
 
                 <FormProgress currentStep={currentStep} />
-                
+
                 <div className="mt-12 overflow-hidden">
                   {currentStep === 1 && <FormStepCompany defaultValues={formData} onNext={handleNext} />}
                   {currentStep === 2 && <FormStepDemand defaultValues={formData} onNext={handleNext} onBack={handleBack} />}
