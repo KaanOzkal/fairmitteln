@@ -359,5 +359,5 @@ export const Receipt = ({ children, className = '' }) => {
     el.style.clipPath = p >= 1 ? 'none' : `inset(0 0 ${((1 - p) * 100).toFixed(1)}% 0)`;
     el.style.transform = p >= 1 ? 'none' : `translateY(${((1 - p) * -22).toFixed(1)}px)`;
   });
-  return <div ref={ref} className={className} style={{ clipPath: 'inset(0 0 100% 0)' }}>{children}</div>;
+  return <div ref={ref} className={className} style={{ clipPath: 'inset(0 0 100% 0)' }}>{children}</div>;    
 };

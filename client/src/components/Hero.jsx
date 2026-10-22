@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, ShieldCheck, Globe2, Users, CheckCircle2, ChevronRight, MapPin, Truck, Package, Wrench, Warehouse, Settings, Plane, FileText, BadgeCheck, Plus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { FlightOverlay, FLY_MS, Journey, ScrollTicker, FX_CSS, FX_COPY, TruckProgress, RoadDivider, Receipt } from './scrollFx';
+import { FlightOverlay, FLY_MS, Journey, ScrollTicker, FX_CSS, FX_COPY, TruckProgress, RoadDivider, Receipt } from './ScrollFx';
 
 /*
   BİLET KOPARMA + GEÇİŞ ANİMASYONLARI
