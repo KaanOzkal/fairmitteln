@@ -118,7 +118,7 @@ export const Journey = ({ t }) => {
     if (!path || !sec) return;
     const L = path.getTotalLength();
     const r = sec.getBoundingClientRect();
-    const p = reduced() ? 1 : clamp((window.innerHeight * 0.8 - r.top) / (r.height * 0.9));
+    const p = reduced() ? 1 : clamp((window.innerHeight * 0.6 - r.top) / (r.height * 0.9));
 
     path.style.strokeDasharray = `${L}`;
     path.style.strokeDashoffset = `${L * (1 - p)}`;

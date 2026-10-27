@@ -20,7 +20,7 @@ import { FlightOverlay, FLY_MS, Journey, ScrollTicker, FX_CSS, FX_COPY, TruckPro
 const COPY = {
   de: {
     'hero.tag': 'Personalvermittlung für Logistik & Technik',
-    'hero.t1': 'Geprüfte Fahrer',
+    'hero.t1': 'Erfahrene Fahrer',
     'hero.t2': '& Techniker aus der Türkei',
     'hero.t3': 'für Ihren Betrieb.',
     'hero.t4': 'Visum inklusive.',
